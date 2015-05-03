@@ -1,0 +1,82 @@
+Prova de Compiladores - 2014.2
+Prof. Marcelo d'Amorim
+
+1. [ 1 ponto ] Marque V ou F para as afirmações abaixo:
+
+(  ) Análise Semântica é realizada após Análise Sintática e tem o papel
+de capturar alguns erros de programação não relacionados a sintaxe do
+programa.
+
+(  ) A otimização de código é realizada pelo front-end do compilador.
+
+2. [ 1 ponto ] Implemente na linguagem de sua preferencia um parser
+recursivo descendente para a BNF abaixo:
+
+ A -> B  c
+ B -> b1 B | b2
+
+3. [ 1 ponto ] Mostre uma string aceita pela linguagem acima e a
+árvore abstrata corresponde, usando o parser que você escreveu na
+questão 2.
+
+(outras questões foram removidas porque eram da segunda unidade)
+
+
+
+
+
+
+———— Respostas ————
+
+
+
+
+
+1. [ 1 ponto ] Marque V ou F para as afirmações abaixo:
+
+( V ) Análise Semântica é realizada após Análise Sintática e tem o papel
+de capturar alguns erros de programação não relacionados a sintaxe do
+programa.
+
+( F ) A otimização de código é realizada pelo front-end do compilador.
+Justificativa: é feita no back-end.
+
+2. [ 1 ponto ] Implemente na linguagem de sua preferencia um parser
+recursivo descendente para a BNF abaixo:
+
+ A -> B  c
+ B -> b1 B | b2
+
+void A() {
+    switch (lookahead){
+        case B(): B(); match(TO_c); break;
+        default: syntax_error();
+    }
+}
+
+void B() {
+    switch (lookahead){
+        case (TO_b1): match(TO_b1); B(); break;
+	case (TO_b2): match(TO_b2); break;
+        default: syntax_error();
+    }
+}
+
+
+3. [ 1 ponto ] Mostre uma string aceita pela linguagem acima e a
+árvore abstrata corresponde, usando o parser que você escreveu na
+questão 2.
+
+String: b1 b1 b2 c
+
+AST:
+
+      A
+    /   \
+   B     c
+  / \
+ b1  B
+    / \
+   b1  B
+       | 
+       b2
